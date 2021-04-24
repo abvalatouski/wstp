@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
         "-linkmode",     "connect"
     };
     size_t link_argc = sizeof(link_argv) / sizeof(char *);
-    int err;
+    int err = WSEOK;
     WSLINK link = WSOpenArgcArgv(env, link_argc, link_argv, &err);
     if (link == NULL || err != WSEOK) {
         fputs("Failed to create WSTP connection.", stderr);

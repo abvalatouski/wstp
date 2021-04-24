@@ -126,12 +126,12 @@ in `...\Wolfram Mathematica\SystemFiles\Links\WSTP\DeveloperKit\Windows-x86-64\S
 and the header file (`wstp.h`) is placed
 in `...\Wolfram Mathematica\SystemFiles\Links\WSTP\DeveloperKit\Windows-x86-64\CompilerAdditions`.
 
-Unlike previous Wolfram scripts C-client:
-- requires WSTP library initialization and deinitialization;
-- requires explicit resource allocation, deallocation, and error handling
+Unlike client written in Wolfram Language, C-client does:
+- require WSTP library initialization and deinitialization;
+- require explicit resource allocation, deallocation, and error handling
   (for conveniece I'll use a bunch of `goto`s);
-- creates a link with explicit passing of command line arguments to the Kernel;
-- writes data onto the link with `WSPut`-functions and "packeting".
+- create a link with explicit passing of command line arguments to the Kernel;
+- write data onto the link with `WSPut`-functions and "packeting".
 
 ```c
 #include <stdio.h>
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
         "-linkmode",     "connect"
     };
     size_t link_argc = sizeof(link_argv) / sizeof(char *);
-    int err;
+    int err = WSEOK;
     WSLINK link = WSOpenArgcArgv(env, link_argc, link_argv, &err);
     if (link == NULL || err != WSEOK) {
         fputs("Failed to create WSTP connection.", stderr);
