@@ -1,0 +1,7 @@
+resolver: lts-16.20
+packages:
+  - wolfram-link
+extra-include-dirs:
+  - include
+extra-lib-dirs:
+  - .

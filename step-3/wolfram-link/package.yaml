@@ -1,0 +1,31 @@
+name:     wolfram-link
+version:  0.0.1
+category: Foreign
+author:   Aliaksei Valatouski
+
+library:
+  source-dirs: src
+  dependencies:
+    - base >= 4.10
+    - mtl
+  exposed-modules:
+    - Foreign.Wolfram.Link
+  other-modules:
+    - Foreign.Wolfram.Link.WSTP.Functions
+    - Foreign.Wolfram.Link.WSTP.Types
+  default-extensions:
+    - GeneralizedNewtypeDeriving
+    - StandaloneDeriving
+
+executables:
+  client:
+    source-dirs: app
+    main:        Main.hs
+    dependencies:
+      - base >= 4.10
+      - mtl
+      - wolfram-link
+    default-extensions:
+      - LambdaCase
+    extra-libraries:
+      - wstp64i4
