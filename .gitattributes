@@ -1,2 +1,2 @@
 *.wls linguist-language=Mathematica
-Makefile linguist-vendored
+step-2/Makefile -linguist-detectable
