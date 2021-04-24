@@ -1,1 +1,2 @@
 *.wls linguist-language=Mathematica
+Makefile linguist-vendored

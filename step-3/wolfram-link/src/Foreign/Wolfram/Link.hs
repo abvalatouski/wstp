@@ -24,7 +24,7 @@ import qualified Foreign.Wolfram.Link.WSTP.Functions as WSTP
 import qualified Foreign.Wolfram.Link.WSTP.Types     as WSTP
 
 data Link = Link
-    { linkName :: {-# UNPACK #-} !String
+    { linkName ::                !String
     , linkEnv  :: {-# UNPACK #-} !(Ptr WSTP.Env)
     , linkPtr  :: {-# UNPACK #-} !(Ptr WSTP.Link)
     }
@@ -110,10 +110,6 @@ initLibrary = do
         else
             modify' $ \link -> link { linkEnv = env }
 
--- | Activates a WSTP connection, waiting for the program at the other end to respond.
---
---   WARNING:
---   This function can block indefinitely, unless the program at the other end will respond. 
 activate :: MonadIO m => LinkT m ()
 activate = withLinkPtr_ "Failed to activate WSTP connection." WSTP.activate
 
