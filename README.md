@@ -189,7 +189,7 @@ err_3:
 err_2:
     WSDeinitialize(env);
 err_1:
-    return 1;
+    return 0;
 }
 ```
 
