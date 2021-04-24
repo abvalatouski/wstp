@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
         "-linkprotocol", "TCPIP",
         "-linkmode",     "connect"
     };
-    size_t link_argc = sizeof(link_argv) / sizeof(const char *);
+    size_t link_argc = sizeof(link_argv) / sizeof(char *);
     int err;
     WSLINK link = WSOpenArgcArgv(env, link_argc, link_argv, &err);
     if (link == NULL || err != WSEOK) {
@@ -183,6 +183,7 @@ int main(int argc, char *argv[])
         goto err_3;
     }
     puts(response);
+    WSReleaseString(link, response);
 
 err_3:
     WSClose(link);
