@@ -1,6 +1,15 @@
 # IDE
 .vscode
+hie.yaml
 
+# C
 step-2/include
 step-2/client.exe
 step-2/wstp64i4.dll
+
+# Haskell
+step-3/include
+step-3/wstp64i4.dll
+step-3/**/.stack-work
+step-3/stack.yaml.lock
+step-3/**/*.cabal
