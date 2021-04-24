@@ -1,4 +1,4 @@
-# Talking with Wolfram Mathematica via Haskell (and C FFI)
+# Talking with Wolfram Mathematica from Wolfram scripts, C, and Haskell
 
 _If you're not interested in Haskell, you can read the article up to "Step 3" or even "Step 2"._
 
@@ -92,7 +92,7 @@ While[True,
             StringForm["SERVER: ``", response]
         ]];
 
-        (* No error handling because the client waits our response. *)
+        (* No error handling because the client waits a response. *)
         LinkWrite[link, response];
     ];
 ];
@@ -220,3 +220,5 @@ Let's test the program. The output will look like this:
 ```
 
 ## Step 3. Rewriting client in Haskell
+
+TODO: FFI bindings, monadic interface, etc.
