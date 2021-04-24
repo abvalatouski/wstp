@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     }
 
     if (!WSActivate(link)) {
+        fputs("Failed to activate WSTP connection.", stderr);
         goto err_3;
     }
 
