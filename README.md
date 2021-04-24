@@ -1,14 +1,16 @@
 # Talking with Wolfram Mathematica from Wolfram scripts, C, and Haskell
 
+_The article is under development..._
+
 _If you're not interested in Haskell, you can read the article up to "Step 3" or even "Step 2"._
 
 ## Brief introduction into WSTP
 
 [WSTP (Wolfram Symbolic Transfer protocol)](https://www.wolfram.com/wstp/) is a protocol
 that allows programs and Wolfram Kernel to communicate.
-From perspective of this article, WSTP is a thing that will allow us to connect Haskell code
-with the Kernel and perform various calculations, such as solving equations
-and computing integrals.
+From perspective of this article, WSTP allows arbitrary programs to send requests to the Kernel
+to perform various calculations, such as solving equations
+and computing integrals, and, of course, get results back.
 
 All the logic will be split into server and client code.
 The server will have access to the Kernel and the client will perform requests to the server
@@ -18,7 +20,7 @@ or scripts. I'll peek the second one to automate the process. However, the clien
 in almost any programming language. First, I'll use Wolfram Language for the sake of simplicity,
 then I'll switch to C, and then finally to Haskell.
 
-## Step 1. Connecting to Wolfram scripts via WSTP
+## Step 1. Connecting two Wolfram scripts via WSTP
 
 So, the client code will be incredibly simple.
 It gonna **connect** to some link, then activate it, then write a random expression onto it,
@@ -40,8 +42,8 @@ response = LinkRead[link];
 Print[response];
 ```
 
-The script will be launched with the following command.
 I'll choose the link name as `6000` and I want to request an evaluation of, say, `2 + 2`.
+Then the script will be launched with the following command:
 
 ```
 wolframscript -file client.wls 6000 "2 + 2"
@@ -49,7 +51,7 @@ wolframscript -file client.wls 6000 "2 + 2"
 
 Now let's write a server. I'll name the script as `server.wls`.
 
-First, let's initialize the link like I did in the previous code, but now I'll **create**
+First, let's initialize the link like in the previous code, but now I'll **create**
 the link and parametrize out only its name.
 
 ```
@@ -61,8 +63,8 @@ LinkActivate[link];
 ```
 
 Let's write a loop where the server will handle all the incoming client requests.
-Notice, that the client might close the connection, so we need to wrap some code into `Check`
-and `Quiet` functions to catch and handle the errors.
+Notice, that the client might close the connection, thus some code needs to be wrapped
+into `Check` and `Quiet` functions to handle the errors.
 
 ```
 While[True,
@@ -125,6 +127,7 @@ and the header file (`wstp.h`) is placed
 in `...\Wolfram Mathematica\SystemFiles\Links\WSTP\DeveloperKit\Windows-x86-64\CompilerAdditions`.
 
 Unlike previous Wolfram scripts C-client:
+- requires WSTP library initialization and deinitialization;
 - requires explicit resource allocation, deallocation, and error handling
   (for conveniece I'll use a bunch of `goto`s);
 - creates a link with explicit passing of command line arguments to the Kernel;
